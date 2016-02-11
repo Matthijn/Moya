@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/Moya/Moya.svg?branch=master)](https://travis-ci.org/Moya/Moya) [![codecov.io](https://codecov.io/github/Moya/Moya/coverage.svg?branch=master)](https://codecov.io/github/Moya/Moya?branch=master)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-
 ![Moya Logo](web/moya_logo_github.png)
 
 You're a smart developer. You probably use [Alamofire](https://github.com/Alamofire/Alamofire) to abstract away access to
@@ -8,196 +5,152 @@ NSURLSession and all those nasty details you don't really care about. But then,
 like lots of smart developers, you write ad hoc network abstraction layers. They
 are probably called "APIManager" or "NetworkModel", and they always end in tears.
 
-![Moya Overview](web/diagram.png)
+# Smoya
+The above is the story of Moya. But there is one thing that bugs me about it. That huge single enum for the service. Which grows and grows. Next to that, you’ll split the definition of a single REST endpoint up into four different parts within one file. 
 
-Ad hoc network layers are common in iOS apps. They're bad for a few reasons:
+So here is Smoya. 
 
-- Makes it hard to write new apps ("where do I begin?")
-- Makes it hard to maintain existing apps ("oh my god, this mess...")
-- Makes it hard to write unit tests ("how do I do this again?")
+Smoya is all the goodness of Moya, without the horrifying Enum. Instead you can use structs which has multiple benefits:
 
-So the basic idea of Moya is that we want some network abstraction layer that
-sufficiently encapsulates actually calling Alamofire directly. It should be simple
-enough that common things are easy, but comprehensive enough that complicated things
-are also easy.
+- You can easily divide your API definition accros multiple files
+- All information regarding one single API Restpoint is contained within one place
 
-> If you use Alamofire to abstract away `NSURLSession`, why not use something
-to abstract away the nitty gritty of URLs, parameters, etc?
+*Plus*
 
-Some awesome features of Moya:
+- Automatic generating of the `parameters` in the request based on the structure of the struct using reflection
+- Easy support for urls with formatting like: `/user/{userId}`
 
-- Compile-time checking for correct API endpoint accesses.
-- Lets you define a clear usage of different endpoints with associated enum values.
-- Treats test stubs as first-class citizens so unit testing is super-easy.
-
-Sample Project
---------------
-
-There's a sample project in the Demo directory. Have fun!
-
-Project Status
---------------
-
-This project is actively under development, and is being used in [Artsy's
-new auction app](https://github.com/Artsy/eidolon). We consider it
-ready for production use.
-
-Currently, we support Xcode 7 and Swift 2.
-
-Installation
-------------
-
-### CocoaPods
-Just add `pod 'Moya'` to your Podfile and go!
-
-In any file you'd like to use Moya in, don't forget to
-import the framework with `import Moya`.
-
-For RxSwift or ReactiveCocoa extensions, this project will include
-them as dependencies. You can do this via CocoaPods subspecs.
-
-```rb
-pod 'Moya/RxSwift'
-pod 'Moya/ReactiveCocoa'
-```
-
-Then run `pod install`.
-
-### Carthage
-Carthage users can point to this repository and use whichever
-generated framework they'd like, `Moya`, `RxMoya`, or `ReactiveMoya`.
-The full Moya framework is bundled in each of those frameworks;
-importing more than one framework in a single file will result in
-ambiguous lookups at compile time.
+# Example
 
 ```
-github "Moya/Moya"
-```
+struct Register: TargetType, ReflectingParameters {
 
-Use
----
+	// These are the same as you would define in Moya, notice the missing baseURL
+	let path = "/account/register"
+	let method = Moya.Method.POST
+	let sampleData = NSData()
 
-After [some setup](docs/Examples.md), using Moya is really simple. You can access an API like this:
-
-```swift
-provider.request(.Zen) { result in
-    switch result {
-    case let .Success(moyaResponse):
-        let data = moyaResponse.data
-        let statusCode = moyaResponse.statusCode
-        // do something with the response data or statusCode
-    case .Failure(error):
-        // this means there was a network failure - either the request
-        // wasn't sent (connectivity), or no response was received (server
-        // timed out).  If the server responds with a 4xx or 5xx error, that
-        // will be sent as a ".Success"-ful response.
-    }
+	// These are properties not defined in the TargetType protocol and are automatically added to the parameters dictionary through reflection
+	let username = String
+	let password = String
 }
 ```
 
-That's a basic example. Many API requests need parameters. Moya encodes these
-into the enum you use to access the endpoint, like this:
+Now, with the beauty of structs. You automatically get a constructor for instance variables who have not been defined at compile time: So this yields: `Register(username: "Foo", password: "TopSecret")`
 
-```swift
-provider.request(.UserProfile("ashfurrow")) { result in
-    // do something with the result
+This way you can make a request the same way as you would have with Moya (RxMoya example)
+
+```
+switchboardService.request(
+	Register(username: "Foo", password: "TopSecret")
+).subscribeNext { (response) -> Void in
+	print(Welcome to our service!)
 }
 ```
 
-No more typos in URLs. No more missing parameter values. No more messing with
-parameter encoding.
+You might have noticed there was no `parameters` instance variable defined. Since the struct is extended through the `ReflectingParameters` protocol these are automatically generated for us. 
 
-For examples, see the [documentation](docs/).
+The parameters used in this request will be:
 
-Reactive Extensions
--------------------
+```
+[
+	"username": "foo",
+	"password": "topSecret"
+]
+```
 
-Even cooler are the reactive extensions. Moya provides reactive extensions for
-[ReactiveCocoa](docs/ReactiveCocoa.md) and [RxSwift](docs/RxSwift.md).
+## Nested parameters
+Sometimes you want to sent a nested dictionary, which is also easy with Smoya. Just use structs within your definition struct:
 
-## ReactiveCocoa
+```
+// Define a struct to embed which should implement the Marker protocol (which is empty and is only used for reflection)
+struct Twitter: Marker
+{
+	let oAuthToken: String
+	let oAuthSecret: String
+}
 
-For `ReactiveCocoa`, it immediately returns a `SignalProducer` (`RACSignal`
-is also available if needed) that you can start or bind or map or whatever
-you want to do. To handle errors, for instance, we could do the following:
+struct Authenticate: TargetType, ReflectingParameters
+{
+	
+	let path = "/authenticate"
+	let method = Moya.Method.POST
+	let sampleData = NSData()
 
-```swift
-provider.request(.UserProfile("ashfurrow")).start { (event) -> Void in
-    switch event {
-    case .Next(let response):
-        image = UIImage(data: response.data)
-    case .Failed(let error):
-        print(error)
-    default:
-      break
-    }
+	let twitter: Twitter	
+	let device: String
+
 }
 ```
 
-##RxSwift
+Which will generate a dictionary structure similar to:
 
-For `RxSwift`, it immediately returns an `Observable` that you can subscribe to
-or bind or map or whatever you want to do. To handle errors, for instance,
-we could do the following:
+```
+[
+	"twitter": [
+		"oAuthToken": "theToken",
+		"oAuthSecret": "theSecret"
+	],
+	"device": "iPad"
+]
+```
 
-```swift
-provider.request(.UserProfile("ashfurrow")).subscribe { (event) -> Void in
-    switch event {
-    case .Next(let response):
-        image = UIImage(data: response.data)
-    case .Error(let error):
-        print(error)
-    default:
-        break
-    }
+## URL Formatting
+This is something Moya currently lacks in but makes for prettier URL’s in your REST service.
+
+Consider the following struct:
+
+```
+struct User: TargetType
+{
+	let path = "/user/{id}"
+	let method = Moya.Method.GET
+	let sampleData = NSData()
+
+	let id: Int
 }
 ```
 
----
+Smoya uses search and replace on the bracketed parts of the url to determine the path to use for this request. Since `{id}` is written in this path. It will look up the instance variable `id` for this struct and use that value as the actual path. 
 
-In addition to the option of using signals instead of callback blocks, there are
-also a series of signal operators for RxSwift and ReactiveCocoa that will attempt
-to map the data received from the network response into either an image, some JSON,
-or a string, with `mapImage()`, `mapJSON()`, and `mapString()`, respectively. If the mapping is unsuccessful, you'll get an error on the signal. You also get handy methods
-for filtering out certain status codes. This means that you can place your code for
-handling API errors like 400's in the same places as code for handling invalid
-responses.
+This way Smoya will request the path: `/user/1`. 
 
-Community Extensions
---------------------
+If you also use the `ReflectingParameters` protocol instance variables used to build the url will not be send in the dictionary. So no duplicate data is sent. 
 
-Moya has a great community around it and some people have created some very helpful extensions.
+# BaseURL
 
-- [Moya-ObjectMapper](https://github.com/ivanbruel/Moya-ObjectMapper) - ObjectMapper bindings for Moya for easier JSON serialization
-- [Moya-SwiftyJSONMapper](https://github.com/AvdLee/Moya-SwiftyJSONMapper) - SwiftyJSON bindings for Moya for easier JSON serialization
-- [Moya-Argo](https://github.com/wattson12/Moya-Argo) - Argo bindings for Moya for easier JSON serialization
-- [Moya-ModelMapper](https://github.com/sunshinejr/Moya-ModelMapper) - ModelMapper bindings for Moya for easier JSON serialization 
+The BaseURL is not part of the definition of the struct. To add the BaseURL to the request make your own endpoint like so:
 
-We appreciate all the work being done by the community around Moya. If you would like to have your extension featured in the list above, simply create a pull request adding your extensions to the list.
+```
+func defaultEndpoint(target: TargetType) -> Endpoint
+{
+	return Endpoint(
+		URL: self.targetUrl(target),
+		sampleResponseClosure: {
+			.NetworkResponse(200, target.sampleData)
+		},
+		method: target.method,
+		parameters: target.parameters,
+		parameterEncoding: .URL,
+		httpHeaderFields: nil
+	)
+}
 
-Contributing
-------------
+func targetUrl(target: TargetType) -> String
+{
+	return NSURL(string: "http://yourBaseUrl.com").URLByAppendingPathComponent(target.parsedPath).absoluteString
+}
+```
 
-Hey! Like Moya? Awesome! We could actually really use your help!
+Which you can use when you create your service:
 
-Open source isn't just writing code. Moya could use your help with any of the
-following:
+```
+let provider = RxMoyaProvider(endpointClosure: self.defaultEndpoint)
+```
 
-- Finding (and reporting!) bugs.
-- New feature suggestions.
-- Answering questions on issues.
-- Documentation improvements.
-- Reviewing pull requests.
-- Helping to manage issue priorities.
-- Fixing bugs/new features.
+# Podfile
 
-If any of that sounds cool to you, send a pull request! After a few
-contributions, we'll add you as an admin to the repo so you can merge pull
-requests and help steer the ship :ship:
+```
+pod 'SMoya/RxSwift' :git => 'https://github.com/Matthijn/SMoya'
+```
 
-Please note that this project is released with a Contributor Code of Conduct. By participating in this project you agree to abide by [its terms](https://github.com/Moya/contributors/blob/master/Code of Conduct.md).
-
-License
--------
-
-Moya is released under an MIT license. See LICENSE for more information.

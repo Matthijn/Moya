@@ -7,9 +7,9 @@ Pod::Spec.new do |s|
   with more compile-time confidence.
 
   ReactiveCocoa and RxSwift extensions exist as well. Instructions for installation
-  are in [the README](https://github.com/Moya/Moya).
+  are in [the README](https://github.com/Matthijn/Moya).
   EOS
-  s.homepage     = "https://github.com/Moya/Moya"
+  s.homepage     = "https://github.com/Matthijn/Moya"
   s.license      = { :type => "MIT", :file => "License.md" }
   s.author             = { "Ash Furrow" => "ash@ashfurrow.com" }
   s.social_media_url   = "http://twitter.com/ashfurrow"
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.9'
   s.watchos.deployment_target = '2.0'
   s.tvos.deployment_target = '9.0'
-  s.source       = { :git => "https://github.com/Moya/Moya.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/Matthijn/Moya.git", :tag => s.version }
   s.default_subspec = "Core"
 
   s.subspec "Core" do |ss|
