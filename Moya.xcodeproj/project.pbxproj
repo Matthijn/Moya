@@ -191,6 +191,18 @@
 		55B5D5D61C1F6FC500A11B82 /* Moya+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5D5CC1C1F6FBE00A11B82 /* Moya+Alamofire.swift */; };
 		55B5D5D71C1F6FC500A11B82 /* Moya+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5D5CC1C1F6FBE00A11B82 /* Moya+Alamofire.swift */; };
 		55B5D5D81C1F6FC600A11B82 /* Moya+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B5D5CC1C1F6FBE00A11B82 /* Moya+Alamofire.swift */; };
+		83A805121C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805131C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805141C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805151C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805161C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805171C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805181C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A805191C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A8051A1C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A8051B1C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A8051C1C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
+		83A8051D1C6D350200C0878B /* Smoya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A805111C6D350200C0878B /* Smoya.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -241,6 +253,7 @@
 		55B5D5C41C1F6F6900A11B82 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/tvOS/Result.framework; sourceTree = "<group>"; };
 		55B5D5C81C1F6F8F00A11B82 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/watchOS/Result.framework; sourceTree = "<group>"; };
 		55B5D5CC1C1F6FBE00A11B82 /* Moya+Alamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya+Alamofire.swift"; sourceTree = "<group>"; };
+		83A805111C6D350200C0878B /* Smoya.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Smoya.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -377,6 +390,7 @@
 		0676A5D31BFE80D3001C7F55 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				83A805111C6D350200C0878B /* Smoya.swift */,
 				0676A5D41BFE80D3001C7F55 /* Endpoint.swift */,
 				0676A5D51BFE80D3001C7F55 /* Error.swift */,
 				0676A5D61BFE80D3001C7F55 /* Image.swift */,
@@ -1184,6 +1198,7 @@
 			files = (
 				55B5D5D01C1F6FC200A11B82 /* Moya+Alamofire.swift in Sources */,
 				0676A5F51BFE80D3001C7F55 /* Error.swift in Sources */,
+				83A805151C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6011BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A6311BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A66D1BFE80D3001C7F55 /* Response.swift in Sources */,
@@ -1204,6 +1219,7 @@
 				0676A6021BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A6321BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A66E1BFE80D3001C7F55 /* Response.swift in Sources */,
+				83A805161C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A64A1BFE80D3001C7F55 /* Moya+ReactiveCocoa.swift in Sources */,
 				0676A5EA1BFE80D3001C7F55 /* Endpoint.swift in Sources */,
 				0676A6261BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
@@ -1228,6 +1244,7 @@
 				0676A6271BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
 				0676A63F1BFE80D3001C7F55 /* NetworkLoggerPlugin.swift in Sources */,
 				55B5D5D21C1F6FC300A11B82 /* Moya+Alamofire.swift in Sources */,
+				83A805171C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6931BFE80D3001C7F55 /* Observable+Moya.swift in Sources */,
 				0676A61B1BFE80D3001C7F55 /* Plugin.swift in Sources */,
 				0676A60F1BFE80D3001C7F55 /* Moya.swift in Sources */,
@@ -1240,6 +1257,7 @@
 			files = (
 				55B5D5CD1C1F6FBE00A11B82 /* Moya+Alamofire.swift in Sources */,
 				0676A5F21BFE80D3001C7F55 /* Error.swift in Sources */,
+				83A805121C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A5FE1BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A62E1BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A66A1BFE80D3001C7F55 /* Response.swift in Sources */,
@@ -1260,6 +1278,7 @@
 				0676A5FF1BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A62F1BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A66B1BFE80D3001C7F55 /* Response.swift in Sources */,
+				83A805131C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6471BFE80D3001C7F55 /* Moya+ReactiveCocoa.swift in Sources */,
 				0676A5E71BFE80D3001C7F55 /* Endpoint.swift in Sources */,
 				0676A6231BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
@@ -1284,6 +1303,7 @@
 				0676A6241BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
 				0676A63C1BFE80D3001C7F55 /* NetworkLoggerPlugin.swift in Sources */,
 				55B5D5CF1C1F6FC100A11B82 /* Moya+Alamofire.swift in Sources */,
+				83A805141C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6901BFE80D3001C7F55 /* Observable+Moya.swift in Sources */,
 				0676A6181BFE80D3001C7F55 /* Plugin.swift in Sources */,
 				0676A60C1BFE80D3001C7F55 /* Moya.swift in Sources */,
@@ -1296,6 +1316,7 @@
 			files = (
 				55B5D5D31C1F6FC300A11B82 /* Moya+Alamofire.swift in Sources */,
 				0676A5F81BFE80D3001C7F55 /* Error.swift in Sources */,
+				83A805181C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6041BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A6341BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A6701BFE80D3001C7F55 /* Response.swift in Sources */,
@@ -1316,6 +1337,7 @@
 				0676A6051BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A6351BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A6711BFE80D3001C7F55 /* Response.swift in Sources */,
+				83A805191C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A64D1BFE80D3001C7F55 /* Moya+ReactiveCocoa.swift in Sources */,
 				0676A5ED1BFE80D3001C7F55 /* Endpoint.swift in Sources */,
 				0676A6291BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
@@ -1340,6 +1362,7 @@
 				0676A62A1BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
 				0676A6421BFE80D3001C7F55 /* NetworkLoggerPlugin.swift in Sources */,
 				55B5D5D51C1F6FC400A11B82 /* Moya+Alamofire.swift in Sources */,
+				83A8051A1C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6961BFE80D3001C7F55 /* Observable+Moya.swift in Sources */,
 				0676A61E1BFE80D3001C7F55 /* Plugin.swift in Sources */,
 				0676A6121BFE80D3001C7F55 /* Moya.swift in Sources */,
@@ -1352,6 +1375,7 @@
 			files = (
 				55B5D5D61C1F6FC500A11B82 /* Moya+Alamofire.swift in Sources */,
 				0676A5FB1BFE80D3001C7F55 /* Error.swift in Sources */,
+				83A8051B1C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6071BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A6371BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A6731BFE80D3001C7F55 /* Response.swift in Sources */,
@@ -1372,6 +1396,7 @@
 				0676A6081BFE80D3001C7F55 /* Image.swift in Sources */,
 				0676A6381BFE80D3001C7F55 /* NetworkActivityPlugin.swift in Sources */,
 				0676A6741BFE80D3001C7F55 /* Response.swift in Sources */,
+				83A8051C1C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6501BFE80D3001C7F55 /* Moya+ReactiveCocoa.swift in Sources */,
 				0676A5F01BFE80D3001C7F55 /* Endpoint.swift in Sources */,
 				0676A62C1BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
@@ -1396,6 +1421,7 @@
 				0676A62D1BFE80D3001C7F55 /* CredentialsPlugin.swift in Sources */,
 				0676A6451BFE80D3001C7F55 /* NetworkLoggerPlugin.swift in Sources */,
 				55B5D5D81C1F6FC600A11B82 /* Moya+Alamofire.swift in Sources */,
+				83A8051D1C6D350200C0878B /* Smoya.swift in Sources */,
 				0676A6991BFE80D3001C7F55 /* Observable+Moya.swift in Sources */,
 				0676A6211BFE80D3001C7F55 /* Plugin.swift in Sources */,
 				0676A6151BFE80D3001C7F55 /* Moya.swift in Sources */,
