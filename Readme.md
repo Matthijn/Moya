@@ -5,12 +5,10 @@ NSURLSession and all those nasty details you don't really care about. But then,
 like lots of smart developers, you write ad hoc network abstraction layers. They
 are probably called "APIManager" or "NetworkModel", and they always end in tears.
 
-# Smoya
+# This fork
 The above is the story of Moya. But there is one thing that bugs me about it. That huge single enum for the service. Which grows and grows. Next to that, you’ll split the definition of a single REST endpoint up into four different parts within one file. 
 
-So here is Smoya. 
-
-Smoya is all the goodness of Moya, without the horrifying Enum. Instead you can use structs which has multiple benefits:
+Here is all the goodness of Moya, without the horrifying Enum. Instead you can use structs which has multiple benefits:
 
 - You can easily divide your API definition accros multiple files
 - All information regarding one single API Restpoint is contained within one place
@@ -60,7 +58,7 @@ The parameters used in this request will be:
 ```
 
 ## Nested parameters
-Sometimes you want to sent a nested dictionary, which is also easy with Smoya. Just use structs within your definition struct:
+Sometimes you want to sent a nested dictionary, which is also easy. Just use structs within your definition struct:
 
 ```
 // Define a struct to embed which should implement the Marker protocol (which is empty and is only used for reflection)
@@ -111,9 +109,9 @@ struct User: TargetType
 }
 ```
 
-Smoya uses search and replace on the bracketed parts of the url to determine the path to use for this request. Since `{id}` is written in this path. It will look up the instance variable `id` for this struct and use that value as the actual path. 
+Now there is search and replace on the bracketed parts of the url to determine the path to use for this request. Since `{id}` is written in this path. It will look up the instance variable `id` for this struct and use that value as the actual path. 
 
-This way Smoya will request the path: `/user/1`. 
+This way the request the path will be: `/user/1`. 
 
 If you also use the `ReflectingParameters` protocol instance variables used to build the url will not be send in the dictionary. So no duplicate data is sent. 
 
@@ -151,6 +149,6 @@ let provider = RxMoyaProvider(endpointClosure: self.defaultEndpoint)
 # Podfile
 
 ```
-pod 'SMoya/RxSwift' :git => 'https://github.com/Matthijn/SMoya'
+pod 'Moya/RxSwift' :git => 'https://github.com/Matthijn/Moya'
 ```
 
