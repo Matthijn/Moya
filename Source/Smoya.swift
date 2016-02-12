@@ -9,17 +9,14 @@
 import Foundation
 import Moya
 
-// The "one big enum to rule them all" way of Moya was not something I was a fan of. So I made this  extension for Moya where you can use structs instead of the enum.
-// The main advantage is that the parameters in the TargetType are automatically generated from the structure of the struct itself
+/// Protocol for facilitating parameter generation based on structures of nested structs.
+protocol ReflectiveParameters { }
 
-/// If your TargetType struct implements this protocol through extensions the paramaters are generated based on the structs structure
-protocol ReflectingParameters { }
-
-/// Structs within the target type should implement Marker so nested dictionaries can be generated
-protocol Marker { }
+/// Structs within the target type should implement this protocol so that nested dictionaries can be generated.
+protocol NestedDictionary { }
 
 /// The magic that converts structs to nice dictionaries for parameter use
-extension TargetType where Self: ReflectingParameters
+public extension TargetType where Self: ReflectiveParameters
 {
     /// Returns the parameters for this struct through reflection
     var parameters: [String: AnyObject]? {
@@ -47,7 +44,7 @@ extension TargetType where Self: ReflectingParameters
                 let value = child.value
                 
                 // The child is a struct, make it a sub directory
-                if value is Marker
+                if value is NestedDictionary
                 {
                     var subDict = [String: AnyObject]()
                     dict[key] = buildDict(&subDict, item: value)
@@ -70,7 +67,7 @@ extension TargetType where Self: ReflectingParameters
 }
 
 /// Adding path parsing to the target type. E.g path: /user/{id} will be 1 if the property id on the struct exists and is 1
-extension TargetType
+public extension TargetType
 {
     // Ignoring these default keys for parameters or path
     var knownKeys: [String] { return ["path", "method", "parameters", "sampleData"] }
