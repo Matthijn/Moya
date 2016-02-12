@@ -3,7 +3,6 @@
 //  Smoya
 //
 //  Created by Matthijn Dijkstra on 08/02/16.
-//  Copyright © 2016 Indev. All rights reserved.
 //
 
 import Foundation

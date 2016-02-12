@@ -21,7 +21,7 @@ Here is all the goodness of Moya, without the horrifying Enum. Instead you can u
 # Example
 
 ```
-struct Register: TargetType, ReflectingParameters {
+struct Register: TargetType, ReflectiveParameters {
 
 	// These are the same as you would define in Moya, notice the missing baseURL
 	let path = "/account/register"
@@ -46,7 +46,7 @@ switchboardService.request(
 }
 ```
 
-You might have noticed there was no `parameters` instance variable defined. Since the struct is extended through the `ReflectingParameters` protocol these are automatically generated for us. 
+You might have noticed there was no `parameters` instance variable defined. Since the struct is extended through the `ReflectiveParameters` protocol these are automatically generated for us. 
 
 The parameters used in this request will be:
 
@@ -61,14 +61,14 @@ The parameters used in this request will be:
 Sometimes you want to sent a nested dictionary, which is also easy. Just use structs within your definition struct:
 
 ```
-// Define a struct to embed which should implement the Marker protocol (which is empty and is only used for reflection)
-struct Twitter: Marker
+// Define a struct to embed which should implement the NestedDictionary protocol (which is empty and is only used for reflection)
+struct Twitter: NestedDictionary
 {
 	let oAuthToken: String
 	let oAuthSecret: String
 }
 
-struct Authenticate: TargetType, ReflectingParameters
+struct Authenticate: TargetType, ReflectiveParameters
 {
 	
 	let path = "/authenticate"
@@ -113,7 +113,7 @@ Now there is search and replace on the bracketed parts of the url to determine t
 
 This way the request the path will be: `/user/1`. 
 
-If you also use the `ReflectingParameters` protocol instance variables used to build the url will not be send in the dictionary. So no duplicate data is sent. 
+If you also use the `ReflectiveParameters` protocol instance variables used to build the url will not be send in the dictionary. So no duplicate data is sent. 
 
 # BaseURL
 
