@@ -10,10 +10,10 @@ import Foundation
 import Moya
 
 /// Protocol for facilitating parameter generation based on structures of nested structs.
-protocol ReflectiveParameters { }
+public protocol ReflectiveParameters { }
 
 /// Structs within the target type should implement this protocol so that nested dictionaries can be generated.
-protocol NestedDictionary { }
+public protocol NestedDictionary { }
 
 /// The magic that converts structs to nice dictionaries for parameter use
 public extension TargetType where Self: ReflectiveParameters
