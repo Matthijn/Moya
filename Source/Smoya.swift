@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Moya
 
 /// Protocol for facilitating parameter generation based on structures of nested structs.
 public protocol ReflectiveParameters { }
