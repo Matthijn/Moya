@@ -39,7 +39,7 @@ Now, with the beauty of structs. You automatically get a constructor for instanc
 This way you can make a request the same way as you would have with Moya (RxMoya example)
 
 ```
-switchboardService.request(
+myService.request(
 	Register(username: "Foo", password: "TopSecret")
 ).subscribeNext { (response) -> Void in
 	print(Welcome to our service!)
