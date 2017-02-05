@@ -149,6 +149,6 @@ let provider = RxMoyaProvider(endpointClosure: self.defaultEndpoint)
 # Podfile
 
 ```
-pod 'Moya/RxSwift' :git => 'https://github.com/Matthijn/Moya'
+pod 'Moya/RxSwift', :git => 'https://github.com/Matthijn/Moya'
 ```
 
