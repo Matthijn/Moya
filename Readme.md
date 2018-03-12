@@ -1,3 +1,5 @@
+*This fork is ages behind now, not sure if they solved this issue by now, it was too big of a change to be accepted by them at the time*
+
 ![Moya Logo](web/moya_logo_github.png)
 
 You're a smart developer. You probably use [Alamofire](https://github.com/Alamofire/Alamofire) to abstract away access to
